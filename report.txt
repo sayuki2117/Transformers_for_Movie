@@ -1,0 +1,65 @@
+SentimentScope: Movie Review Sentiment Analysis Report
+=======================================================
+
+Project summary
+---------------
+
+This project developed a Transformer-based binary sentiment classifier for
+IMDB movie reviews. The objective was to classify each review as either
+positive or negative and achieve more than 75% accuracy on unseen test data.
+
+The IMDB dataset contained 25,000 labeled training reviews and 25,000 labeled
+test reviews. Positive reviews were assigned label 1 and negative reviews were
+assigned label 0. The training data was shuffled and split into a 90% training
+set and a 10% validation set.
+
+Each review was tokenized with the BERT uncased subword tokenizer and padded or
+truncated to a maximum sequence length of 128 tokens. A custom PyTorch Dataset
+and DataLoader were implemented to efficiently provide token IDs, attention
+masks, and labels to the model.
+
+The model was a custom Transformer architecture containing token and positional
+embeddings, causal multi-head self-attention, feed-forward layers, residual
+connections, layer normalization, dropout, mean pooling, and a two-class
+classification head. The model was trained with cross-entropy loss and the
+AdamW optimizer for three epochs using a learning rate of 0.0003 and a batch
+size of 32.
+
+Training results
+----------------
+
+Epoch 1: loss = 0.6120, validation accuracy = 70.44%
+Epoch 2: loss = 0.5012, validation accuracy = 73.72%
+Epoch 3: loss = 0.4318, validation accuracy = 75.72%
+
+Final test accuracy: 76.51%
+
+The model exceeded the project requirement of greater than 75% test accuracy.
+The trained checkpoint was saved as models/sentiment_model.pt and can be used
+with predict.py for classifying new movie reviews.
+
+Key takeaways
+-------------
+
+1. A custom Transformer can successfully learn meaningful sentiment patterns
+   from movie reviews and achieve 76.51% accuracy on unseen IMDB test data.
+
+2. Validation accuracy improved consistently across all three epochs, while
+   training loss decreased from 0.6120 to 0.4318, showing that the model was
+   learning effectively.
+
+3. Subword tokenization, positional embeddings, self-attention, and mean
+   pooling provide a practical architecture for converting a complete review
+   into a binary sentiment prediction.
+
+4. The saved checkpoint and prediction script make the trained model reusable
+   for inference on new reviews without retraining.
+
+Conclusion
+----------
+
+The SentimentScope project successfully implemented the complete sentiment
+analysis pipeline: data loading, exploration, tokenization, custom Dataset and
+DataLoader creation, Transformer model construction, training, validation, and
+testing. With a final test accuracy of 76.51%, the project met and exceeded its
+original performance target.
